@@ -16,7 +16,6 @@ public class Superhero {
         this.isHuman = isHuman;
         this.strength = strength;
     }
-    public Superhero(){}
 
     public String getName(){
         return name;
