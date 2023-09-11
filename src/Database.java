@@ -1,33 +1,28 @@
 public class Database {
 
-    private Superhero[] superheroList;
+    private final Superhero[] superheroList;
     private int count = 0;
 
     public Database(){
         this.superheroList = new Superhero[2];
     }
     public void addSuperhero(String name, String realName, String superPower,
-                             int yearCreated, boolean isHuman, double strengh){
+                             int yearCreated, boolean isHuman, double strength){
 
-        superheroList[count++] = new Superhero(name, realName, superPower, yearCreated, isHuman, strengh);
-    }
-
-    public Superhero getSuperheroList(){
-        return superheroList[0];
+        superheroList[count++] = new Superhero(name, realName, superPower, yearCreated, isHuman, strength);
     }
 
     public String toString(){
-        String list = "";
+        StringBuilder list = new StringBuilder();
         for (Superhero superhero : superheroList) {
-            list += "Superhero" +
-                    "\nName: " + superhero.getName() +
-                    "\nReal name: " + superhero.getRealName() +
-                    "\nSuperpower: " + superhero.getSuperPower() +
-                    "\nYear created: " + superhero.getYearCreated() +
-                    "\nIs human: " + superhero.getIsHuman() +
-                    "\nStrength: " + superhero.getStrength() + "\n\n";
+            list.append("Superhero" + "\nName: ").append(superhero.getName())
+            .append("\nReal name: ").append(superhero.getRealName())
+            .append("\nSuperpower: ").append(superhero.getSuperPower())
+            .append("\nYear created: ").append(superhero.getYearCreated())
+            .append("\nIs human: ").append(superhero.getIsHuman())
+            .append("\nStrength: ").append(superhero.getStrength()).append("\n\n");
         }
-        return list;
+        return list.toString();
 
 
     }

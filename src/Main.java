@@ -6,7 +6,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Database superheroList = new Database();
 
-        System.out.println("Velkomen til Superhero Universet!");
+        System.out.println("Velkommen til Superhero Universet!");
         System.out.print("\n1. Create superhero\n9. End program\nChoose: ");
 
         int choice = sc.nextInt();
@@ -17,7 +17,7 @@ public class Main {
                 System.out.print("Add name: ");
                 String name = sc.next();
 
-                System.out.print("Add realname: ");
+                System.out.print("Add real name: ");
                 String realName = sc.next();
 
                 System.out.print("Add superpower: ");
@@ -33,8 +33,6 @@ public class Main {
                 double strength = sc.nextDouble();
 
                 superheroList.addSuperhero(name, realName, superPower, yearCreated, isHuman, strength);
-                //Superhero x = new Superhero(name, realName, superPower, yearCreated, isHuman, strength);
-                //System.out.println("\n\n\n" + x);
 
                 System.out.println("Superhero added to list, would you like to create a new superhero?");
 
@@ -49,13 +47,5 @@ public class Main {
         else {
             System.out.println("Program ended");
         }
-
-
-
-
-        /*
-        superheroList.addSuperhero("Superman", "Clark Kent", "\n-Fly\n-Superhuman strengh\n-Lasereyes\n-Bullet proof skin\n", 1938, true, 99999);
-        System.out.println(superheroList);
-         */
     }
 }
