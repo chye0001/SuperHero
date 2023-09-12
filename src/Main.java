@@ -15,18 +15,29 @@ public class Main {
         if (choice==1) {
             do {
                 System.out.print("Add name: ");
-                String name = sc.next();
+                String x = sc.nextLine();
+                String name = sc.nextLine();
 
                 System.out.print("Add real name: ");
-                String realName = sc.next();
+                String realName = sc.nextLine();
 
                 System.out.print("Add superpower: ");
-                String superPower = sc.next();
+                String superPower = sc.nextLine();
 
                 System.out.print("Add year created: ");
+                while(!sc.hasNextInt()){
+                    System.out.print("You must enter a number: ");
+                    //Linjen efter skal være af sc.next(); metoden, da denne metode tager alle former for input.
+                    //hvis det var sc.nextInt(); ville programmet crashe, hvis man inputer andet end integers, da denne scanner ikke kan indlæse andet end integer.
+                    sc.next();
+                }
                 int yearCreated = sc.nextInt();
 
                 System.out.print("Add isHuman: ");
+                while(!sc.hasNextBoolean()) {
+                    System.out.println("You must precisely type true or false: ");
+                    sc.next();
+                }
                 boolean isHuman = sc.nextBoolean();
 
                 System.out.print("Add strength: ");
@@ -46,6 +57,7 @@ public class Main {
         }
         else {
             System.out.println("Program ended");
+            System.out.println(superheroList);
         }
     }
 }
