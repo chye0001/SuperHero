@@ -19,7 +19,7 @@ public class Database {
     }
 
     public void addSuperhero(String name, String realName, String superPower,
-                             int yearCreated, boolean isHuman, double strength) {
+                             int yearCreated, Boolean isHuman, double strength) {
 
         Superhero newSuperhero = new Superhero(name, realName, superPower, yearCreated, isHuman, strength);
         superheroList.add(newSuperhero);
@@ -32,8 +32,15 @@ public class Database {
                     .append("\nReal name: ").append(superhero.getRealName())
                     .append("\nSuperpower: ").append(superhero.getSuperPower())
                     .append("\nYear created: ").append(superhero.getYearCreated())
-                    .append("\nIs human: ").append(superhero.getIsHuman())
-                    .append("\nStrength: ").append(superhero.getStrength()).append("\n\n");
+                    .append("\nIs human: ");
+
+                    if(superhero.getIsHuman()==true){
+                        list.append("Yes");
+                    }
+                    else {
+                        list.append("No");
+                    }
+                    list.append("\nStrength: ").append(superhero.getStrength()).append("\n\n");
         }
         return list.toString();
     }

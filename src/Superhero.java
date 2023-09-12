@@ -4,11 +4,11 @@ public class Superhero {
     private String realName;
     private String superPower;
     private int yearCreated;
-    private boolean isHuman;
+    private Boolean isHuman;
     private double strength;
 
     public Superhero(String name, String realName, String superPower,
-                      int yearCreated, boolean isHuman, double strength) {
+                      int yearCreated, Boolean isHuman, double strength) {
         this.name = name;
         this.realName = realName;
         this.superPower = superPower;
@@ -29,7 +29,7 @@ public class Superhero {
     public int getYearCreated(){
         return yearCreated;
     }
-    public boolean getIsHuman(){
+    public Boolean getIsHuman(){
         return isHuman;
     }
     public double getStrength(){

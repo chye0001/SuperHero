@@ -7,7 +7,7 @@ public class Main {
         Database superheroList = new Database();
 
         System.out.println("Velkommen til Superhero Universet!");
-        System.out.print("\n1. Create superhero\n9. End program\nChoose: ");
+        System.out.print("\n1. Create superhero\n2. See list of superheros\n9. End program\nChoose: ");
 
         int choice = sc.nextInt();
         System.out.println();
@@ -35,10 +35,10 @@ public class Main {
 
                 System.out.print("Add isHuman: ");
                 while(!sc.hasNextBoolean()) {
-                    System.out.println("You must precisely type true or false: ");
+                    System.out.print("You must precisely type true or false: ");
                     sc.next();
                 }
-                boolean isHuman = sc.nextBoolean();
+                Boolean isHuman = sc.nextBoolean();
 
                 System.out.print("Add strength: ");
                 double strength = sc.nextDouble();
@@ -46,18 +46,21 @@ public class Main {
                 superheroList.addSuperhero(name, realName, superPower, yearCreated, isHuman, strength);
 
                 System.out.println("Superhero added to list, would you like to create a new superhero?");
-
-                System.out.print("\n1. Create superhero\n9. End program\nChoose: ");
+                System.out.print("\n1. Create superhero\n2. See list of superheros\n9. End program\nChoose: ");
                 choice = sc.nextInt();
-                System.out.println();
 
-            } while (choice!=9);
-            System.out.println("\nProgram ended");
-            System.out.println(superheroList);
-        }
-        else {
+
+                    if (choice == 2) {
+                        System.out.println(superheroList);
+                    }
+
+            } while (choice!=9 && choice!=2);
             System.out.println("Program ended");
+
+        } else if (choice==2) {
             System.out.println(superheroList);
+        } else {
+            System.out.println("Program ended");
         }
     }
 }
