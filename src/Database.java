@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Database {
 
     private final ArrayList<Superhero> superheroList = new ArrayList<>(2);
+    private int count = 2;
 
     //Original konstruktør. (fjern "this....")
     /*public Database(){
@@ -12,7 +13,7 @@ public class Database {
 
     //Midlertidig hardkodet superhelte så jeg ikke konstant skal oprette nye superheros når jeg vil teste koden.
     public Database() {
-        Superhero ironMan = new Superhero("Iron Man", "Tony Stark", "Has a bigbran", 2005, true, 800);
+        Superhero ironMan = new Superhero("Iron Man", "Tony Stark", "Has big brain", 2005, true, 800);
         Superhero captainAmerica = new Superhero("Captain America", "Steve Rogers", "Superhuman Strength", 1941, true, 999);
         superheroList.add(ironMan);
         superheroList.add(captainAmerica);
@@ -20,9 +21,22 @@ public class Database {
 
     public void addSuperhero(String name, String realName, String superPower,
                              int yearCreated, Boolean isHuman, double strength) {
-
+        count++;
         Superhero newSuperhero = new Superhero(name, realName, superPower, yearCreated, isHuman, strength);
         superheroList.add(newSuperhero);
+    }
+
+    public ArrayList<Superhero> searchSuperhero(String search) {
+        ArrayList<Superhero> searchResults = new ArrayList<>();
+
+        for (Superhero superhero : superheroList) {
+            if (superhero.getName().toLowerCase().contains(search.toLowerCase()) || superhero.getRealName().toLowerCase().contains(search.toLowerCase())){
+                if (!searchResults.contains(superhero.getName()) || !searchResults.contains(superhero.getRealName())){
+                    searchResults.add(new Superhero(superhero.getName(), superhero.getRealName(), superhero.getSuperPower(), superhero.getYearCreated(), superhero.getIsHuman(), superhero.getStrength()));
+                }
+            }
+        }
+        return searchResults;
     }
 
     public String toString() {

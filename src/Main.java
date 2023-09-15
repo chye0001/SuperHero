@@ -7,7 +7,7 @@ public class Main {
         Database superheroList = new Database();
 
         System.out.println("Velkommen til Superhero Universet!");
-        System.out.print("\n1. Create superhero\n2. See list of superheros\n9. End program\nChoose: ");
+        System.out.print("\n1. Create superhero\n2. See list of superheros\n3. Search for a superhero \n9. End program\nChoose: ");
 
         int choice = sc.nextInt();
         System.out.println();
@@ -46,20 +46,36 @@ public class Main {
                 superheroList.addSuperhero(name, realName, superPower, yearCreated, isHuman, strength);
 
                 System.out.println("Superhero added to list, would you like to create a new superhero?");
-                System.out.print("\n1. Create superhero\n2. See list of superheros\n9. End program\nChoose: ");
+                System.out.print("\n1. Create superhero\n2. See list of superheros\n3. Search for a superhero\n9. End program\nChoose: ");
                 choice = sc.nextInt();
 
+            } while (choice!=9 && choice!=2 && choice!=3);
 
-                    if (choice == 2) {
-                        System.out.println(superheroList);
-                    }
+            if (choice==2){
+                System.out.println(superheroList);
+            }
+            if (choice==3){
+                System.out.print("Input search: ");
+                String search = sc.nextLine();
 
-            } while (choice!=9 && choice!=2);
-            System.out.println("Program ended");
+                System.out.println(superheroList.searchSuperhero(search));
+            }
+            if (choice==9){
+                System.out.println("Program ended");
+            }
 
         } else if (choice==2) {
-            System.out.println(superheroList);
-        } else {
+            System.out.println(superheroList);}
+
+        else if (choice==3){
+            System.out.print("Input search: ");
+            String z = sc.next();
+            String search = sc.nextLine();
+
+            System.out.println(superheroList.searchSuperhero(search));
+        }
+
+        else {
             System.out.println("Program ended");
         }
     }
