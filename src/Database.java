@@ -32,7 +32,7 @@ public class Database {
         for (Superhero superhero : superheroList) {
             if (superhero.getName().toLowerCase().contains(search.toLowerCase()) || superhero.getRealName().toLowerCase().contains(search.toLowerCase())){
                 if (!searchResults.contains(superhero.getName()) || !searchResults.contains(superhero.getRealName())){
-                    searchResults.add(new Superhero(superhero.getName(), superhero.getRealName(), superhero.getSuperPower(), superhero.getYearCreated(), superhero.getIsHuman(), superhero.getStrength()));
+                    searchResults.add(superhero);
                 }
             }
         }
