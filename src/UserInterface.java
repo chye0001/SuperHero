@@ -15,7 +15,7 @@ public class UserInterface {
         System.out.println("Velkommen til Superhero Universet!");
 
        do {
-           System.out.print("\n1. Create superhero\n2. See list of superheros\n3. Search for a superhero \n9. End program\nChoose: ");
+           System.out.print("\n1. Create superhero\n2. See list of superheros\n3. Search for a superhero \n4. Edit list of superheros\n9. End program\nChoose: ");
            choice = sc.nextInt();
            System.out.println();
 
@@ -25,6 +25,8 @@ public class UserInterface {
                listOfSuperheros();
            } else if (choice == 3) {
                searchSuperhero();
+           } else if (choice==4) {
+               editList();
            } else if (choice == 9) {
                endProgram();
            }
@@ -72,7 +74,7 @@ public class UserInterface {
 
     public void listOfSuperheros() {
         System.out.println(superheroList);
-
+        System.out.println("Would you like to see the list again?");
     }
 
     public void searchSuperhero() {
@@ -81,8 +83,13 @@ public class UserInterface {
         String search = sc.nextLine();
 
         System.out.println(superheroList.searchSuperhero(search));
+        System.out.println("Would you like to search again?");
     }
 
+    public void editList(){
+        superheroList.editSuperheroList();
+        System.out.println("Would you like to edit the list again?");
+    }
     public void endProgram() {
         System.out.println("Program ended");
     }
