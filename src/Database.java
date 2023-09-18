@@ -4,13 +4,11 @@ import java.util.Scanner;
 public class Database {
 
     private final ArrayList<Superhero> superheroList = new ArrayList<>(2);
-    private int count = 2;
-    private ArrayList<Superhero> searchResults = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
-    //Original konstruktør. (fjern "this....")
-    /*public Database(){
-        this.superheroList = new Superhero[2];
+    //Original konstruktør
+    /*
+    public Database(){
     }
      */
 
@@ -22,15 +20,18 @@ public class Database {
         superheroList.add(captainAmerica);
     }
 
+    //Denne metode anvendes til at få fat i listen med superhelte i klassen UserInterface, og anvendes til at printe "fejlmeddeles", hvis listen er tom.
+    public ArrayList<Superhero> getSuperheroList(){
+        return superheroList;
+    }
     public void addSuperhero(String name, String realName, String superPower,
                              int yearCreated, Boolean isHuman, double strength) {
-        count++;
         Superhero newSuperhero = new Superhero(name, realName, superPower, yearCreated, isHuman, strength);
         superheroList.add(newSuperhero);
     }
 
     public ArrayList<Superhero> searchSuperhero(String search) {
-
+        ArrayList<Superhero> searchResults = new ArrayList<>();
         for (Superhero superhero : superheroList) {
             if (superhero.getName().toLowerCase().contains(search.toLowerCase()) || superhero.getRealName().toLowerCase().contains(search.toLowerCase())) {
                 if (!searchResults.contains(superhero.getName()) || !searchResults.contains(superhero.getRealName())) {
@@ -40,7 +41,6 @@ public class Database {
         }
         return searchResults;
     }
-
 
     public void editSuperheroList() {
         if (superheroList.size() == 0) {
@@ -56,56 +56,127 @@ public class Database {
                         superhero.getStrength());
             }
             System.out.print("Choose a superhero from the list to edit: ");
-            int userChoise = sc.nextInt();
 
-            Superhero chosenSuperheroToEdit = superheroList.get(userChoise - 1);
-            System.out.println("\nThe chosen superhero to edit:\n" + chosenSuperheroToEdit);
+            //This whole try-code block throws an indexOutOfBoundsExceptions if user inputs a value that's out of bounds.
+            try {
+                //This block of code forces user to input a number.
+                while (!sc.hasNextInt()) {
+                    System.out.print("You must enter a number from the list: ");
+                    sc.nextLine();
+                }
 
-            System.out.println("\nEdit data and press enter. If you do not wish to edit, just press enter to continue.\n");
+                int userChoise = sc.nextInt();
 
-            System.out.println("Name: " + chosenSuperheroToEdit.getName());
-            String x = sc.nextLine();
-            String newName = sc.nextLine();
-            if (!newName.isEmpty()) {
-                chosenSuperheroToEdit.setName(newName);
-            }
+                Superhero chosenSuperheroToEdit = superheroList.get(userChoise - 1);
 
-            System.out.println("Real name: " + chosenSuperheroToEdit.getRealName());
-            String newRealName = sc.nextLine();
-            if (!newRealName.isEmpty()) {
-                chosenSuperheroToEdit.setRealName(newRealName);
-            }
+                System.out.println("\nThe chosen superhero to edit:\n" + chosenSuperheroToEdit);
 
-            System.out.println("Superpower: " + chosenSuperheroToEdit.getSuperpower());
-            String newSuperpower = sc.nextLine();
-            if (!newSuperpower.isEmpty()) {
-                chosenSuperheroToEdit.setSuperPower(newSuperpower);
-            }
+                System.out.println("\nEdit data and press enter. If you do not wish to edit, just press enter to continue.\n");
 
-            System.out.println("Year created: " + chosenSuperheroToEdit.getYearCreated());
-            String newYearCreated = sc.nextLine();
-            if (!newYearCreated.isEmpty()) {
-                chosenSuperheroToEdit.setYearCreated(Integer.parseInt(newYearCreated));
-            }
+                System.out.println("Name: " + chosenSuperheroToEdit.getName());
+                String x = sc.nextLine();
+                String newName = sc.nextLine();
+                if (!newName.isEmpty()) {
+                    chosenSuperheroToEdit.setName(newName);
+                }
 
-            System.out.println("Is human: " + chosenSuperheroToEdit.getIsHuman());
-            String newIsHuman = sc.nextLine();
-            if (!newIsHuman.isEmpty()) {
-                chosenSuperheroToEdit.setIsHuman(Boolean.parseBoolean(newIsHuman));
-            }
+                System.out.println("Real name: " + chosenSuperheroToEdit.getRealName());
+                String newRealName = sc.nextLine();
+                if (!newRealName.isEmpty()) {
+                    chosenSuperheroToEdit.setRealName(newRealName);
+                }
 
-            System.out.println("Strength: " + chosenSuperheroToEdit.getStrength());
-            String newStrength = sc.nextLine();
-            if (!newStrength.isEmpty()) {
-                chosenSuperheroToEdit.setStrength(Integer.parseInt(newStrength));
-            }
+                System.out.println("Superpower: " + chosenSuperheroToEdit.getSuperpower());
+                String newSuperpower = sc.nextLine();
+                if (!newSuperpower.isEmpty()) {
+                    chosenSuperheroToEdit.setSuperPower(newSuperpower);
+                }
 
-            if (!newName.isEmpty() || !newRealName.isEmpty() ||
-                    !newSuperpower.isEmpty() || !newYearCreated.isEmpty() ||
-                    !newIsHuman.isEmpty() || !newStrength.isEmpty()) {
-                System.out.println("The chosen superhero has been edited!\n");
-            } else {
-                System.out.println("No edits has been performed.");
+                System.out.println("Year created: " + chosenSuperheroToEdit.getYearCreated());
+                String newYearCreated = sc.nextLine();
+                if (!newYearCreated.isEmpty()) {
+                    chosenSuperheroToEdit.setYearCreated(Integer.parseInt(newYearCreated));
+                }
+
+                System.out.println("Is human: " + chosenSuperheroToEdit.getIsHuman());
+                String newIsHuman = sc.nextLine();
+                if (!newIsHuman.isEmpty()) {
+                    chosenSuperheroToEdit.setIsHuman(Boolean.parseBoolean(newIsHuman));
+                }
+
+                System.out.println("Strength: " + chosenSuperheroToEdit.getStrength());
+                String newStrength = sc.nextLine();
+                if (!newStrength.isEmpty()) {
+                    chosenSuperheroToEdit.setStrength(Integer.parseInt(newStrength));
+                }
+
+                if (!newName.isEmpty() || !newRealName.isEmpty() ||
+                        !newSuperpower.isEmpty() || !newYearCreated.isEmpty() ||
+                        !newIsHuman.isEmpty() || !newStrength.isEmpty()) {
+                    System.out.println("The chosen superhero has been edited!\n");
+                } else {
+                    System.out.println("No edits has been performed.");
+                }
+
+                //this Catch-block catches any indexOutOfBoundsExceptions.
+            } catch (Exception e) {
+                //This do-while loop, forces the user to input a "positive value" / number from the list.
+                do {
+                    System.out.print("You have to choose between 1-" + --count + ": ");
+                } while (sc.nextInt() <= 0);
+
+                int userChoise = sc.nextInt();
+
+                Superhero chosenSuperheroToEdit = superheroList.get(userChoise - 1);
+
+                System.out.println("\nThe chosen superhero to edit:\n" + chosenSuperheroToEdit);
+
+                System.out.println("\nEdit data and press enter. If you do not wish to edit, just press enter to continue.\n");
+
+                System.out.println("Name: " + chosenSuperheroToEdit.getName());
+                String x = sc.nextLine();
+                String newName = sc.nextLine();
+                if (!newName.isEmpty()) {
+                    chosenSuperheroToEdit.setName(newName);
+                }
+
+                System.out.println("Real name: " + chosenSuperheroToEdit.getRealName());
+                String newRealName = sc.nextLine();
+                if (!newRealName.isEmpty()) {
+                    chosenSuperheroToEdit.setRealName(newRealName);
+                }
+
+                System.out.println("Superpower: " + chosenSuperheroToEdit.getSuperpower());
+                String newSuperpower = sc.nextLine();
+                if (!newSuperpower.isEmpty()) {
+                    chosenSuperheroToEdit.setSuperPower(newSuperpower);
+                }
+
+                System.out.println("Year created: " + chosenSuperheroToEdit.getYearCreated());
+                String newYearCreated = sc.nextLine();
+                if (!newYearCreated.isEmpty()) {
+                    chosenSuperheroToEdit.setYearCreated(Integer.parseInt(newYearCreated));
+                }
+
+                System.out.println("Is human: " + chosenSuperheroToEdit.getIsHuman());
+                String newIsHuman = sc.nextLine();
+                if (!newIsHuman.isEmpty()) {
+                    chosenSuperheroToEdit.setIsHuman(Boolean.parseBoolean(newIsHuman));
+                }
+
+                System.out.println("Strength: " + chosenSuperheroToEdit.getStrength());
+                String newStrength = sc.nextLine();
+                if (!newStrength.isEmpty()) {
+                    chosenSuperheroToEdit.setStrength(Integer.parseInt(newStrength));
+                }
+
+                if (!newName.isEmpty() || !newRealName.isEmpty() ||
+                        !newSuperpower.isEmpty() || !newYearCreated.isEmpty() ||
+                        !newIsHuman.isEmpty() || !newStrength.isEmpty()) {
+                    System.out.println("The chosen superhero has been edited!\n");
+                } else {
+                    System.out.println("No edits has been performed.");
+                }
             }
         }
     }
