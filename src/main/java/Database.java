@@ -20,6 +20,10 @@ public class Database {
         superheroList.add(captainAmerica);
     }
 
+    public int getSize(){
+        return superheroList.size();
+    }
+
     //Denne metode anvendes til at få fat i listen med superhelte i klassen UserInterface, og anvendes til at printe "fejlmeddeles", hvis listen er tom.
     public ArrayList<Superhero> getSuperheroList(){
         return superheroList;
