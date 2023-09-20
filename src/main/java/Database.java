@@ -69,9 +69,20 @@ public class Database {
 
         if (userChoice == 0) {
             System.out.println("No superheros were deleted");
-        } else {
+        } else if (userChoice > 0 && userChoice <= superheroList.size()) {
             superheroList.remove(userChoice - 1);
-            System.out.println("The superhero was deleted from your superhero list.");
+            System.out.println("\nThe superhero was deleted from your superhero list.");
+        } else { // catches any indexOutOfBoundsExceptions
+            while (userChoice > superheroList.size() || userChoice<0 ) {
+                System.out.print("You have to choose within the list size: ");
+                userChoice = sc.nextInt();
+            }
+            if (userChoice == 0) {
+                System.out.println("No superheros were deleted");
+                return;
+            }
+            superheroList.remove(userChoice - 1);
+            System.out.println("\nThe superhero was deleted from your superhero list.\nWould you like to delete another superhero?");
         }
     }
 
