@@ -39,6 +39,70 @@ class DatabaseTest {
     }
 
     @Test
+    void addMultipleSuperheros() {
+        //startSize er 1 fordi vi har added iron til at starte med.
+        int startSize = 1;
+        db.addSuperhero("Captain America", "Steve Rogers", "Superhuman Strength", 1941, true, 999);
+        db.addSuperhero("Karl", "KarlJones", "Fly", 2001, true, 12);
+
+        int expectedSize = 3;
+        int actualSize = db.getSize();
+
+        assertEquals(expectedSize, actualSize);
+    }
+
+    @Test
+    void deleteSuperhero(){
+        //Der starter med at være 2 superhelte i databasen. 1 fra beforeEach og 1 som bliver instanceret forneden:
+        db.addSuperhero("Karl", "KarlJones", "Fly", 2001, true, 12);
+
+        //bruger vælger at slette den første superhelt.
+        int userChoice = 1;
+        int expectedSize = 1;
+
+        db.testingTheDeleteFunction(userChoice);
+        int actualSize = db.getSize();
+
+        assertEquals(expectedSize, actualSize);
+    }
+
+    @Test
+    void deleteMultipleSuperheros() {
+        db.addSuperhero("Karl", "KarlJones", "Fly", 2001, true, 12); //Befinder sig på index plads 1.
+        db.addSuperhero("Superman", "Clark Kent", "Superhuman strength, laser eyes, fly", 1958, false, 99999); //Index plads 2.
+
+        int expectedSize = 1;
+        db.testingTheDeleteFunction(3); // deletes Superman
+        db.testingTheDeleteFunction(2); // deletes Karl
+        int actualSize = db.getSize();
+
+        assertEquals(expectedSize, actualSize);
+    }
+
+    @Test
+    void noSuperheroDeleted(){
+        db.addSuperhero("Karl", "KarlJones", "Fly", 2001, true, 12);
+
+        int userChoise = 0;
+        db.testingTheDeleteFunction(userChoise);
+
+        int expectedSize = 2;
+        int actualSize = db.getSize();
+
+        assertEquals(expectedSize, actualSize);
+    }
+
+    @Test
+    void noSearchResultsReachedSuperhero() {
+        int expectedSize = 0;
+
+        ArrayList<Superhero> searchResult = db.searchSuperhero("");
+        int actualSize = 0;
+
+        assertEquals(expectedSize, actualSize);
+    }
+
+    @Test
     void searchSuperhero() {
         //Vi kigger efter size fordi når vi søger på en superhelt, tilføjes denne til en arraylist.
         //og vi ved at vi har netop 1 i denne arraylist fordi vi kun har en iron man i listen.
@@ -51,4 +115,14 @@ class DatabaseTest {
         assertEquals(expectedSize, actualSize);
     }
 
+    @Test
+    void searchForMultipleSuperheros() {
+        db.addSuperhero("Superman", "Clark Kent", "Superhuman strength, laser eyes, fly", 1958, false, 99999);
+        int expectedSize = 2;
+
+        ArrayList<Superhero> searchResult = db.searchSuperhero("man");
+        int actualSize = searchResult.size();
+
+        assertEquals(expectedSize, actualSize);
+    }
 }

@@ -4,20 +4,21 @@ import java.util.Scanner;
 public class Database {
 
     private final ArrayList<Superhero> superheroList = new ArrayList<>(2);
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
+/*
     //Original konstruktør
-    /*
     public Database(){
     }
-     */
+
+ */
 
     //Midlertidig hardkodet superhelte så jeg ikke konstant skal oprette nye superheros når jeg vil teste koden.
     public Database() {
         Superhero ironMan = new Superhero("Iron Man", "Tony Stark", "Has big brain", 2005, true, 800);
         Superhero captainAmerica = new Superhero("Captain America", "Steve Rogers", "Superhuman Strength", 1941, true, 999);
-        superheroList.add(ironMan);
-        superheroList.add(captainAmerica);
+        //superheroList.add(ironMan);
+        //superheroList.add(captainAmerica);
     }
 
     public int getSize(){
@@ -32,6 +33,46 @@ public class Database {
                              int yearCreated, Boolean isHuman, double strength) {
         Superhero newSuperhero = new Superhero(name, realName, superPower, yearCreated, isHuman, strength);
         superheroList.add(newSuperhero);
+    }
+
+    //This method only exist for testing the delete function in my deleteSuperhero method.
+    public void testingTheDeleteFunction(int userChoice) {
+        if (userChoice == 0) {
+            System.out.println("No superheros were deleted");
+        } else {
+            superheroList.remove(userChoice - 1);
+            System.out.println("The superhero was deleted from your superhero list.");
+        }
+    }
+
+    public void deleteSuperhero() {
+        if (superheroList.isEmpty()) {
+            System.out.println("There are no superheros in your list.");
+            return;
+        } else {
+            int count = 1;
+            for (Superhero superhero : superheroList) {
+                System.out.println(count++ + ": " + superhero.getName() + ", " +
+                        superhero.getRealName() + ", " +
+                        superhero.getSuperpower() + ", " +
+                        superhero.getYearCreated() + ", " +
+                        superhero.getIsHuman() + ", " +
+                        superhero.getStrength());
+            }
+        }
+        System.out.print("\nWhich superhero do you wish to delete? If you regret this option press 0.\nChoice: ");
+        while (!sc.hasNextInt()){
+            System.out.print("You must enter a number: ");
+            sc.nextLine();
+        }
+        int userChoice = sc.nextInt();
+
+        if (userChoice == 0) {
+            System.out.println("No superheros were deleted");
+        } else {
+            superheroList.remove(userChoice - 1);
+            System.out.println("The superhero was deleted from your superhero list.");
+        }
     }
 
     public ArrayList<Superhero> searchSuperhero(String search) {
@@ -195,7 +236,7 @@ public class Database {
                     .append("\nYear created: ").append(superhero.getYearCreated())
                     .append("\nIs human: ");
 
-            if (superhero.getIsHuman() == true) {
+            if (superhero.getIsHuman()) {
                 list.append("Yes");
             } else {
                 list.append("No");
