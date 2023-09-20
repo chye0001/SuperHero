@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Database {
@@ -17,8 +18,8 @@ public class Database {
     public Database() {
         Superhero ironMan = new Superhero("Iron Man", "Tony Stark", "Has big brain", 2005, true, 800);
         Superhero captainAmerica = new Superhero("Captain America", "Steve Rogers", "Superhuman Strength", 1941, true, 999);
-        //superheroList.add(ironMan);
-        //superheroList.add(captainAmerica);
+        superheroList.add(ironMan);
+        superheroList.add(captainAmerica);
     }
 
     public int getSize(){
@@ -67,22 +68,27 @@ public class Database {
         }
         int userChoice = sc.nextInt();
 
-        if (userChoice == 0) {
-            System.out.println("No superheros were deleted");
-        } else if (userChoice > 0 && userChoice <= superheroList.size()) {
-            superheroList.remove(userChoice - 1);
-            System.out.println("\nThe superhero was deleted from your superhero list.");
-        } else { // catches any indexOutOfBoundsExceptions
-            while (userChoice > superheroList.size() || userChoice<0 ) {
-                System.out.print("You have to choose within the list size: ");
-                userChoice = sc.nextInt();
-            }
+        try {
             if (userChoice == 0) {
                 System.out.println("No superheros were deleted");
-                return;
+            } else if (userChoice > 0 && userChoice <= superheroList.size()) {
+                superheroList.remove(userChoice - 1);
+                System.out.println("\nThe superhero was deleted from your superhero list.");
+            } else { // catches any indexOutOfBoundsExceptions
+                while (userChoice > superheroList.size() || userChoice < 0) {
+                    System.out.print("You have to choose within the list size: ");
+                    userChoice = sc.nextInt();
+                }
+                if (userChoice == 0) {
+                    System.out.println("No superheros were deleted");
+                    return;
+                }
+                superheroList.remove(userChoice - 1);
+                System.out.println("\nThe superhero was deleted from your superhero list.\nWould you like to delete another superhero?");
             }
-            superheroList.remove(userChoice - 1);
-            System.out.println("\nThe superhero was deleted from your superhero list.\nWould you like to delete another superhero?");
+        }catch (InputMismatchException ime){
+            System.out.print("\nYou can't input anything but a number within the list size.\n");
+            System.out.println("Try again but from the beginning");
         }
     }
 
