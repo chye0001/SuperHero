@@ -13,7 +13,7 @@ public class UserInterface {
     public void startProgram() {
 
         int numberOfChoices = 5;
-        System.out.println("Velkommen til Superhero Universet!");
+        System.out.println("Welcome til Superhero Universet!");
 
         do {
             System.out.print("\n1. Create superhero\n2. See list of superheros\n3. Search for a superhero \n4. Edit list of superheros\n5. Delete a superhero\n6. End program\nChoose: ");
@@ -82,7 +82,27 @@ public class UserInterface {
     }
 
     public void deleteSuperhero(){
-        superheroList.deleteSuperhero();
+        if (superheroList.getSize() == 0) {
+            System.out.println("There are no superheros in your list.");
+            return;
+        } else {
+            int count = 1;
+            for (Superhero superhero : superheroList.getSuperheroList()) {
+                System.out.println(count++ + ": " + superhero.getName() + ", " +
+                        superhero.getRealName() + ", " +
+                        superhero.getSuperpower() + ", " +
+                        superhero.getYearCreated() + ", " +
+                        superhero.getIsHuman() + ", " +
+                        superhero.getStrength());
+            }
+        }
+        System.out.print("\nWhich superhero do you wish to delete? If you regret this option press 0.\nChoice: ");
+        while (!sc.hasNextInt()){
+            System.out.print("You must enter a number: ");
+            sc.nextLine();
+        }
+        int userChoice = sc.nextInt();
+        superheroList.deleteSuperhero(userChoice);
     }
 
     public void listOfSuperheros() {

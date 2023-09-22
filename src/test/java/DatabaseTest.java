@@ -61,7 +61,7 @@ class DatabaseTest {
         int userChoice = 1;
         int expectedSize = 1;
 
-        db.testingTheDeleteFunction(userChoice);
+        db.deleteSuperhero(userChoice);
         int actualSize = db.getSize();
 
         assertEquals(expectedSize, actualSize);
@@ -73,8 +73,8 @@ class DatabaseTest {
         db.addSuperhero("Superman", "Clark Kent", "Superhuman strength, laser eyes, fly", 1958, false, 99999); //Index plads 2.
 
         int expectedSize = 1;
-        db.testingTheDeleteFunction(3); // deletes Superman
-        db.testingTheDeleteFunction(2); // deletes Karl
+        db.deleteSuperhero(3); // deletes Superman
+        db.deleteSuperhero(2); // deletes Karl
         int actualSize = db.getSize();
 
         assertEquals(expectedSize, actualSize);
@@ -85,7 +85,7 @@ class DatabaseTest {
         db.addSuperhero("Karl", "KarlJones", "Fly", 2001, true, 12);
 
         int userChoise = 0;
-        db.testingTheDeleteFunction(userChoise);
+        db.deleteSuperhero(userChoise);
 
         int expectedSize = 2;
         int actualSize = db.getSize();

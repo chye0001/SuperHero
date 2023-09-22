@@ -7,13 +7,6 @@ public class Database {
     private final ArrayList<Superhero> superheroList = new ArrayList<>(2);
     private final Scanner sc = new Scanner(System.in);
 
-/*
-    //Original konstruktør
-    public Database(){
-    }
-
- */
-
     //Midlertidig hardkodet superhelte så jeg ikke konstant skal oprette nye superheros når jeg vil teste koden.
     public Database() {
         Superhero ironMan = new Superhero("Iron Man", "Tony Stark", "Has big brain", 2005, true, 800);
@@ -36,37 +29,7 @@ public class Database {
         superheroList.add(newSuperhero);
     }
 
-    //This method only exist for testing the delete function in my deleteSuperhero method.
-    public void testingTheDeleteFunction(int userChoice) {
-        if (userChoice == 0) {
-            System.out.println("No superheros were deleted");
-        } else {
-            superheroList.remove(userChoice - 1);
-            System.out.println("The superhero was deleted from your superhero list.");
-        }
-    }
-
-    public void deleteSuperhero() {
-        if (superheroList.isEmpty()) {
-            System.out.println("There are no superheros in your list.");
-            return;
-        } else {
-            int count = 1;
-            for (Superhero superhero : superheroList) {
-                System.out.println(count++ + ": " + superhero.getName() + ", " +
-                        superhero.getRealName() + ", " +
-                        superhero.getSuperpower() + ", " +
-                        superhero.getYearCreated() + ", " +
-                        superhero.getIsHuman() + ", " +
-                        superhero.getStrength());
-            }
-        }
-        System.out.print("\nWhich superhero do you wish to delete? If you regret this option press 0.\nChoice: ");
-        while (!sc.hasNextInt()){
-            System.out.print("You must enter a number: ");
-            sc.nextLine();
-        }
-        int userChoice = sc.nextInt();
+    public void deleteSuperhero(int userChoice) {
 
         try {
             if (userChoice == 0) {
@@ -186,59 +149,7 @@ public class Database {
                 do {
                     System.out.print("You have to choose between 1-" + --count + ": ");
                 } while (sc.nextInt() <= 0);
-
-                int userChoise = sc.nextInt();
-
-                Superhero chosenSuperheroToEdit = superheroList.get(userChoise - 1);
-
-                System.out.println("\nThe chosen superhero to edit:\n" + chosenSuperheroToEdit);
-
-                System.out.println("\nEdit data and press enter. If you do not wish to edit, just press enter to continue.\n");
-
-                System.out.println("Name: " + chosenSuperheroToEdit.getName());
-                String x = sc.nextLine();
-                String newName = sc.nextLine();
-                if (!newName.isEmpty()) {
-                    chosenSuperheroToEdit.setName(newName);
-                }
-
-                System.out.println("Real name: " + chosenSuperheroToEdit.getRealName());
-                String newRealName = sc.nextLine();
-                if (!newRealName.isEmpty()) {
-                    chosenSuperheroToEdit.setRealName(newRealName);
-                }
-
-                System.out.println("Superpower: " + chosenSuperheroToEdit.getSuperpower());
-                String newSuperpower = sc.nextLine();
-                if (!newSuperpower.isEmpty()) {
-                    chosenSuperheroToEdit.setSuperPower(newSuperpower);
-                }
-
-                System.out.println("Year created: " + chosenSuperheroToEdit.getYearCreated());
-                String newYearCreated = sc.nextLine();
-                if (!newYearCreated.isEmpty()) {
-                    chosenSuperheroToEdit.setYearCreated(Integer.parseInt(newYearCreated));
-                }
-
-                System.out.println("Is human: " + chosenSuperheroToEdit.getIsHuman());
-                String newIsHuman = sc.nextLine();
-                if (!newIsHuman.isEmpty()) {
-                    chosenSuperheroToEdit.setIsHuman(Boolean.parseBoolean(newIsHuman));
-                }
-
-                System.out.println("Strength: " + chosenSuperheroToEdit.getStrength());
-                String newStrength = sc.nextLine();
-                if (!newStrength.isEmpty()) {
-                    chosenSuperheroToEdit.setStrength(Integer.parseInt(newStrength));
-                }
-
-                if (!newName.isEmpty() || !newRealName.isEmpty() ||
-                        !newSuperpower.isEmpty() || !newYearCreated.isEmpty() ||
-                        !newIsHuman.isEmpty() || !newStrength.isEmpty()) {
-                    System.out.println("The chosen superhero has been edited!\n");
-                } else {
-                    System.out.println("No edits has been performed.");
-                }
+               editSuperheroList();
             }
         }
     }
