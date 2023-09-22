@@ -2,9 +2,8 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    private Scanner sc = new Scanner(System.in);
-    private int choice;
-    private Database superheroDatabase = new Database();
+    private final Scanner scanner = new Scanner(System.in);
+    private final Database superheroDatabase = new Database();
 
     public UserInterface() {
 
@@ -12,18 +11,19 @@ public class UserInterface {
 
     public void startProgram() {
 
-        int numberOfChoices = 5;
+        int choice;
+
         System.out.println("Welcome til Superhero Universet!");
 
         do {
             System.out.print("\n1. Create superhero\n2. See list of superheros\n3. Search for a superhero \n4. Edit list of superheros\n5. Delete a superhero\n6. End program\nChoose: ");
 
-            while (!sc.hasNextInt()) {
+            while (!scanner.hasNextInt()) {
                 System.out.print("You must enter a number: ");
-                sc.nextLine();
+                scanner.nextLine();
             }
 
-            choice = sc.nextInt();
+            choice = scanner.nextInt();
             System.out.println();
 
             if (choice == 1) {
@@ -44,37 +44,37 @@ public class UserInterface {
 
     public void createSuperhero() {
         System.out.print("Add name: ");
-        String x = sc.nextLine();
-        String name = sc.nextLine();
+        scanner.nextLine();
+        String name = scanner.nextLine();
 
         System.out.print("Add real name: ");
-        String realName = sc.nextLine();
+        String realName = scanner.nextLine();
 
         System.out.print("Add superpower: ");
-        String superPower = sc.nextLine();
+        String superPower = scanner.nextLine();
 
         System.out.print("Add year created: ");
-        while (!sc.hasNextInt()) {
+        while (!scanner.hasNextInt()) {
             System.out.print("You must enter a number: ");
             //Linjen efter skal være af sc.next(); metoden, da denne metode tager alle former for input.
-            //hvis det var sc.nextInt(); ville programmet crashe, hvis man inputer andet end integers, da denne scanner ikke kan indlæse andet end integer.
-            sc.next();
+            //Hvis det var sc.nextInt(); ville programmet crashe, hvis man inputer andet end integers, da denne scanner ikke kan indlæse andet end integer.
+            scanner.next();
         }
-        int yearCreated = sc.nextInt();
+        int yearCreated = scanner.nextInt();
 
         System.out.print("Add isHuman: ");
-        while (!sc.hasNextBoolean()) {
+        while (!scanner.hasNextBoolean()) {
             System.out.print("You must precisely type true or false: ");
-            sc.next();
+            scanner.next();
         }
-        Boolean isHuman = sc.nextBoolean();
+        Boolean isHuman = scanner.nextBoolean();
 
         System.out.print("Add strength: ");
-        while (!sc.hasNextDouble()) {
+        while (!scanner.hasNextDouble()) {
             System.out.print("You must enter a number: ");
-            sc.next();
+            scanner.next();
         }
-        double strength = sc.nextDouble();
+        double strength = scanner.nextDouble();
 
         superheroDatabase.addSuperhero(name, realName, superPower, yearCreated, isHuman, strength);
 
@@ -97,11 +97,11 @@ public class UserInterface {
             }
         }
         System.out.print("\nWhich superhero do you wish to delete? If you regret this option press 0.\nChoice: ");
-        while (!sc.hasNextInt()){
+        while (!scanner.hasNextInt()){
             System.out.print("You must enter a number: ");
-            sc.nextLine();
+            scanner.nextLine();
         }
-        int userChoice = sc.nextInt();
+        int userChoice = scanner.nextInt();
         superheroDatabase.deleteSuperhero(userChoice);
     }
 
@@ -115,8 +115,8 @@ public class UserInterface {
 
     public void searchSuperhero() {
         System.out.print("Input search: ");
-        String q = sc.next();
-        String search = sc.nextLine();
+        scanner.next();
+        String search = scanner.nextLine();
 
         System.out.println(superheroDatabase.searchSuperhero(search));
         System.out.println("Would you like to search again?");

@@ -99,7 +99,7 @@ public class Database {
                 System.out.println("\nEdit data and press enter. If you do not wish to edit, just press enter to continue.\n");
 
                 System.out.println("Name: " + chosenSuperheroToEdit.getName());
-                String x = sc.nextLine();
+                sc.nextLine();
                 String newName = sc.nextLine();
                 if (!newName.isEmpty()) {
                     chosenSuperheroToEdit.setName(newName);
