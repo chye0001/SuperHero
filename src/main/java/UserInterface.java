@@ -4,7 +4,7 @@ public class UserInterface {
 
     private Scanner sc = new Scanner(System.in);
     private int choice;
-    private Database superheroList = new Database();
+    private Database superheroDatabase = new Database();
 
     public UserInterface() {
 
@@ -76,18 +76,18 @@ public class UserInterface {
         }
         double strength = sc.nextDouble();
 
-        superheroList.addSuperhero(name, realName, superPower, yearCreated, isHuman, strength);
+        superheroDatabase.addSuperhero(name, realName, superPower, yearCreated, isHuman, strength);
 
         System.out.println("Superhero added to list, would you like to create a new superhero?");
     }
 
     public void deleteSuperhero(){
-        if (superheroList.getSize() == 0) {
+        if (superheroDatabase.getSize() == 0) {
             System.out.println("There are no superheros in your list.");
             return;
         } else {
             int count = 1;
-            for (Superhero superhero : superheroList.getSuperheroList()) {
+            for (Superhero superhero : superheroDatabase.getSuperheroList()) {
                 System.out.println(count++ + ": " + superhero.getName() + ", " +
                         superhero.getRealName() + ", " +
                         superhero.getSuperpower() + ", " +
@@ -102,12 +102,12 @@ public class UserInterface {
             sc.nextLine();
         }
         int userChoice = sc.nextInt();
-        superheroList.deleteSuperhero(userChoice);
+        superheroDatabase.deleteSuperhero(userChoice);
     }
 
     public void listOfSuperheros() {
-        System.out.println(superheroList);
-        if (superheroList.getSuperheroList().isEmpty()) {
+        System.out.println(superheroDatabase);
+        if (superheroDatabase.getSuperheroList().isEmpty()) {
             System.out.println("The database is empty");
         }
         System.out.println("Would you like to see the list again?");
@@ -118,12 +118,12 @@ public class UserInterface {
         String q = sc.next();
         String search = sc.nextLine();
 
-        System.out.println(superheroList.searchSuperhero(search));
+        System.out.println(superheroDatabase.searchSuperhero(search));
         System.out.println("Would you like to search again?");
     }
 
     public void editList() {
-        superheroList.editSuperheroList();
+        superheroDatabase.editSuperheroList();
         System.out.println("Would you like to edit the list again?");
     }
 
