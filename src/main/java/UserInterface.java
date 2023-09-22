@@ -13,7 +13,7 @@ public class UserInterface {
 
         int choice;
 
-        System.out.println("Welcome til Superhero Universet!");
+        System.out.println("Welcome to Superhero Universet!");
 
         do {
             System.out.print("\n1. Create superhero\n2. See list of superheros\n3. Search for a superhero \n4. Edit list of superheros\n5. Delete a superhero\n6. End program\nChoose: ");
