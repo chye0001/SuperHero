@@ -68,9 +68,9 @@ public class Database {
     }
 
     public void editSuperheroList() {
-        if (superheroList.size() == 0) {
+        if (superheroList.isEmpty()) {
             System.out.println("There are no superheros in the list to edit");
-        } else if (superheroList.size() > 0) {
+        } else  {
             int count = 1;
             for (Superhero superhero : superheroList) {
                 System.out.println(count++ + ": " + superhero.getName() + ", " +
